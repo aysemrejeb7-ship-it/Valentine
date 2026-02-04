@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Yess!!!</title>
+  <style>
+    body{
+      margin:0; height:100vh; display:flex; align-items:center; justify-content:center;
+      background: radial-gradient(circle at top, #ffd1e8, #f7b7d3);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .card{
+      width:min(520px, 92vw);
+      background: rgba(255,255,255,.85);
+      border-radius: 18px;
+      padding: 28px 22px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.15);
+      text-align:center;
+    }
+    h1{ margin:0 0 10px; font-size: 28px; }
+    p{ margin: 6px 0; }
+    .small{ font-size: 12px; opacity:.7; margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💖 Yess!!! 💖</h1>
+    <p id="msg">Better choise 😘</p>
+    <p class="small">Nhebk.</p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const name = params.get("name");
+    if (name) document.getElementById("msg").textContent = `Better choise, ${Ons} 😘`;
+  </script>
+</body>
+</html>
