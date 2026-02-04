@@ -1,72 +1,43 @@
-<!doctype html>
-<html lang="it">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Yess 💖</title>
+<script>
+  // Prende il nome dall’URL: ?name=Ons
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name");
 
-  <style>
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: radial-gradient(circle at top, #ffd1e8, #f7b7d3);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
+  // Mostra la frase con il nome
+  if (name) {
+    document.getElementById("msg").textContent =
+      `Nmout 3alik ${name} 😘`;
+  }
 
-    .card{
-      width:min(520px, 92vw);
-      background: rgba(255,255,255,.9);
-      border-radius: 18px;
-      padding: 28px 22px;
-      box-shadow: 0 18px 45px rgba(0,0,0,.15);
-      text-align:center;
-    }
+  // Emoji cuori
+  const hearts = ["💖","💘","💗","💞","💓","❤️","💕"];
 
-    h1{
-      margin:0 0 12px;
-      font-size: 28px;
-    }
+  // Crea un cuore che cade
+  function dropHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
 
-    #msg{
-      font-size: 18px;
-      font-weight: 600;
-      margin: 8px 0;
-    }
+    // Posizione orizzontale random
+    h.style.left = Math.floor(Math.random() * 100) + "vw";
 
-    .small{
-      font-size: 12px;
-      opacity:.7;
-      margin-top: 14px;
-    }
-  </style>
-</head>
+    // Durata animazione
+    const dur = 2.5 + Math.random() * 2.5;
+    h.style.animationDuration = dur + "s";
 
-<body>
+    document.body.appendChild(h);
 
-  <div class="card">
-    <h1>💖 Yess!!! 💖</h1>
+    // Rimuove il cuore dopo che è caduto
+    setTimeout(() => {
+      h.remove();
+    }, dur * 1000);
+  }
 
-    <!-- FRASE PRINCIPALE -->
-    <p id="msg">Nmout 3alik 😘</p>
+  // Avvia pioggia di cuori
+  const rain = setInterval(dropHeart, 120);
 
-    <p class="small">Nhebk ❤️</p>
-  </div>
-
-
-  <!-- SCRIPT -->
-  <script>
-    // Prende il nome dall'URL: ?name=Ons
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name");
-
-    if (name) {
-      document.getElementById("msg").textContent =
-        `Nmout 3alik ${name} 😘`;
-    }
-  </script>
-
-</body>
-</html>
+  // Ferma dopo 6 secondi (più elegante)
+  setTimeout(() => {
+    clearInterval(rain);
+  }, 6000);
+</script>
