@@ -24,11 +24,13 @@
       padding: 30px 24px;
       box-shadow: 0 18px 45px rgba(0,0,0,.15);
       text-align:center;
-      animation: pop .5s ease-out;
+      animation: pop .45s ease-out;
+      position: relative;
+      z-index: 2;
     }
 
     @keyframes pop{
-      0%{ transform: scale(.9); opacity:.25; }
+      0%{ transform: scale(.9); opacity:.2; }
       70%{ transform: scale(1.05); opacity:1; }
       100%{ transform: scale(1); }
     }
@@ -51,20 +53,30 @@
       margin-top: 12px;
     }
 
-    /* Cuori che cadono */
+    /* Cuori (iOS safe) */
     .heart{
-      position: fixed;
-      top: -20px;
-      font-size: 18px;
+      position: absolute;          /* <- non fixed (Safari bug) */
+      top: -40px;
+      font-size: 20px;
       pointer-events: none;
-      animation: fall linear forwards;
-      opacity:.9;
+      opacity: .95;
+      z-index: 9999;
+
+      will-change: transform, opacity;
+
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
     }
 
     @keyframes fall{
+      from{
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
       to{
-        transform: translateY(110vh);
-        opacity: 0.1;
+        transform: translate3d(0,110vh,0);
+        opacity: .1;
       }
     }
   </style>
@@ -75,7 +87,6 @@
   <div class="card">
     <h1>💖 Ouiii !!! 💖</h1>
 
-    <!-- DERJA -->
     <div id="msg">Nmout 3alik 😘</div>
 
     <div class="small">Nhebk ❤️</div>
@@ -83,37 +94,56 @@
 
 
   <script>
-    // Nome da URL: ?name=Ons
+    // Nome da URL
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
 
-    // Inserisce il nome nella frase
     if (name) {
       document.getElementById("msg").textContent =
         `Nmout 3alik ${name} 😘`;
     }
 
-    // Pioggia di cuori
+    // Cuori
     const hearts = ["💖","💘","💗","💞","💓","❤️","💕"];
 
     function dropHeart(){
+
       const h = document.createElement("div");
       h.className = "heart";
+
       h.textContent =
         hearts[Math.floor(Math.random()*hearts.length)];
 
-      h.style.left = Math.random()*100 + "vw";
+      // Posizione orizzontale (vw -> px per Safari)
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      const x = Math.random() * vw;
 
-      const dur = 2.5 + Math.random()*2.5;
+      h.style.left = x + "px";
+
+      // Durata random
+      const dur = 2.8 + Math.random() * 2.5;
       h.style.animationDuration = dur + "s";
 
       document.body.appendChild(h);
 
-      setTimeout(()=> h.remove(), dur*1000);
+      // Trigger GPU (Safari fix)
+      requestAnimationFrame(() => {
+        h.style.transform = "translate3d(0,1px,0)";
+      });
+
+      // Cleanup
+      setTimeout(() => {
+        h.remove();
+      }, dur * 1000 + 200);
     }
 
+    // Avvia pioggia
     const rain = setInterval(dropHeart, 120);
-    setTimeout(()=> clearInterval(rain), 6000);
+
+    // Stop dopo 7s
+    setTimeout(() => {
+      clearInterval(rain);
+    }, 7000);
   </script>
 
 </body>
