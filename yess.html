@@ -6,264 +6,144 @@
   <title>Oui 💖</title>
 
   <style>
-    :root{
-      --rose:#ff2d55;
-      --rose2:#ff6aa8;
-      --ink:#1f1a1e;
-      --card: rgba(255,255,255,.86);
-      --shadow: 0 28px 70px rgba(0,0,0,.16);
-    }
-
-    *{ box-sizing:border-box; }
-
     body{
       margin:0;
-      min-height:100vh;
+      height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
+      background: radial-gradient(circle at top, #ffd1e8, #f7b7d3);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--ink);
       overflow:hidden;
-
-      background:
-        radial-gradient(900px 520px at 16% 14%, rgba(255,255,255,.70), rgba(255,255,255,0) 55%),
-        radial-gradient(820px 520px at 82% 86%, rgba(255,255,255,.60), rgba(255,255,255,0) 60%),
-        radial-gradient(circle at top, #ffe2f0, #f6b6cf 55%, #f3a8c8);
-    }
-
-    /* texture */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:-40px;
-      background-image:
-        radial-gradient(circle at 22px 22px, rgba(255,255,255,.55) 0 1px, transparent 2px),
-        radial-gradient(circle at 92px 74px, rgba(255,255,255,.30) 0 1px, transparent 2px),
-        radial-gradient(circle at 150px 34px, rgba(255,255,255,.22) 0 1px, transparent 2px);
-      background-size: 180px 120px;
-      opacity:.28;
-      pointer-events:none;
-      filter: blur(.15px);
-    }
-
-    /* glow */
-    body::after{
-      content:"";
-      position:fixed;
-      inset:-60px;
-      background:
-        radial-gradient(520px 300px at 50% 10%, rgba(255,45,85,.18), rgba(255,45,85,0) 70%),
-        radial-gradient(700px 420px at 50% 110%, rgba(255,106,168,.14), rgba(255,106,168,0) 75%);
-      pointer-events:none;
-      mix-blend-mode: soft-light;
     }
 
     .card{
       width:min(520px, 92vw);
-      background: var(--card);
-      border-radius: 30px;
-      padding: 30px 22px 22px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.70);
+      background: rgba(255,255,255,.92);
+      border-radius: 18px;
+      padding: 30px 24px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.15);
       text-align:center;
-      position:relative;
-      overflow:hidden;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-
-      transform: translateY(18px) scale(.96);
-      opacity: 0;
-      animation: enter .70s cubic-bezier(.2,.9,.2,1) forwards;
+      animation: pop .45s ease-out;
+      position: relative;
+      z-index: 2;
     }
 
-    /* bordo luce */
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius: 32px;
-      background: linear-gradient(135deg,
-        rgba(255,255,255,.85),
-        rgba(255,255,255,0) 30%,
-        rgba(255,255,255,.55) 60%,
-        rgba(255,255,255,0) 100%);
-      opacity:.40;
-      pointer-events:none;
-    }
-
-    /* ribbon/shine soft */
-    .card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(260px 160px at 20% 20%, rgba(255,45,85,.08), transparent 60%),
-        radial-gradient(280px 180px at 85% 25%, rgba(255,106,168,.08), transparent 65%),
-        radial-gradient(280px 180px at 85% 90%, rgba(255,45,85,.06), transparent 65%);
-      pointer-events:none;
-      opacity:.95;
-    }
-
-    @keyframes enter{
-      0%{ transform: translateY(18px) scale(.96); opacity:0; }
-      70%{ transform: translateY(-2px) scale(1.02); opacity:1; }
-      100%{ transform: translateY(0) scale(1); opacity:1; }
+    @keyframes pop{
+      0%{ transform: scale(.9); opacity:.2; }
+      70%{ transform: scale(1.05); opacity:1; }
+      100%{ transform: scale(1); }
     }
 
     h1{
-      margin:0 0 12px;
-      font-size: 32px;
-      position:relative;
-      z-index:1;
-      letter-spacing:.2px;
-    }
-
-    /* testo appare in sequenza */
-    .line{
-      position:relative;
-      z-index:1;
-      opacity:0;
-      transform: translateY(6px);
-      filter: blur(.2px);
-      animation: reveal .55s ease-out forwards;
-    }
-    .l1{ animation-delay: .35s; }
-    .l2{ animation-delay: .65s; }
-
-    @keyframes reveal{
-      to{ opacity:1; transform: translateY(0); filter: blur(0); }
+      margin:0 0 14px;
+      font-size: 30px;
     }
 
     #msg{
       font-size: 20px;
-      font-weight: 950;
-      margin: 10px 0 6px;
-      color: var(--rose);
-      text-shadow: 0 14px 26px rgba(255,45,85,.16);
+      font-weight: 800;
+      margin: 8px 0;
+      color:#ff2d55;
     }
 
     .small{
       font-size: 14px;
-      font-weight: 800;
-      opacity:.78;
-      margin-top: 10px;
+      opacity:.8;
+      margin-top: 12px;
     }
 
-    /* pulse finale */
-    .pulse{
-      animation: pulse 1.6s ease-in-out infinite;
-      animation-delay: 1.2s;
-    }
-    @keyframes pulse{
-      0%,100%{ transform: scale(1); }
-      50%{ transform: scale(1.02); }
-    }
-
-    /* cuori che cadono (iOS safe: absolute + translate3d) */
+    /* Cuori (iOS safe) */
     .heart{
-      position: absolute;
+      position: absolute;          /* <- non fixed (Safari bug) */
       top: -40px;
       font-size: 20px;
-      pointer-events:none;
+      pointer-events: none;
+      opacity: .95;
       z-index: 9999;
+
       will-change: transform, opacity;
 
       animation-name: fall;
       animation-timing-function: linear;
       animation-fill-mode: forwards;
     }
+
     @keyframes fall{
-      from{ transform: translate3d(0,0,0); opacity:1; }
-      to{ transform: translate3d(0,110vh,0); opacity:.08; }
-    }
-
-    /* sparkles laterali */
-    .spark{
-      position:absolute;
-      width:10px; height:10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.85);
-      box-shadow: 0 0 18px rgba(255,45,85,.18);
-      opacity:0;
-      animation: sparkle 1.6s ease-in-out infinite;
-      pointer-events:none;
-      z-index:0;
-    }
-    .s1{ top:18px; left:18px; animation-delay:.2s; }
-    .s2{ top:22px; right:20px; animation-delay:.6s; }
-    .s3{ bottom:18px; left:20px; animation-delay:.9s; }
-    .s4{ bottom:22px; right:22px; animation-delay:1.2s; }
-    @keyframes sparkle{
-      0%,100%{ transform: scale(.6); opacity:.15; }
-      50%{ transform: scale(1.2); opacity:.55; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .card, .line, .pulse, .spark, .heart{ animation: none !important; }
-      .card{ opacity:1; transform:none; }
-      .line{ opacity:1; transform:none; }
+      from{
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+      to{
+        transform: translate3d(0,110vh,0);
+        opacity: .1;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card pulse" id="card">
-    <div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div><div class="spark s4"></div>
+  <div class="card">
+    <h1>💖 Ouiii !!! 💖</h1>
 
-    <h1 class="line l1">💖 Ouiii !!! 💖</h1>
+    <div id="msg">Nmout 3alik 😘</div>
 
-    <div id="msg" class="line l2">Nmout 3alik 😘</div>
-
-    <div class="small line l2" id="small">Nhebk ❤️</div>
+    <div class="small">Nhebk ❤️</div>
   </div>
 
+
   <script>
-    // Nome da URL: ?name=Ons
+    // Nome da URL
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
 
     if (name) {
-      document.getElementById("msg").textContent = `Nmout 3alik ${name} 😘`;
+      document.getElementById("msg").textContent =
+        `Nmout 3alik ${name} 😘`;
     }
 
-    // Pioggia cuori + sparkles (iOS safe)
-    const hearts = ["💖","💘","💗","💞","💓","❤️","💕","✨"];
+    // Cuori
+    const hearts = ["💖","💘","💗","💞","💓","❤️","💕"];
 
     function dropHeart(){
+
       const h = document.createElement("div");
       h.className = "heart";
-      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
 
-      // px invece di vw (più stabile su iOS)
-      const w = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      h.style.left = (Math.random() * w) + "px";
+      h.textContent =
+        hearts[Math.floor(Math.random()*hearts.length)];
 
-      const dur = 2.6 + Math.random() * 2.6;
+      // Posizione orizzontale (vw -> px per Safari)
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      const x = Math.random() * vw;
+
+      h.style.left = x + "px";
+
+      // Durata random
+      const dur = 2.8 + Math.random() * 2.5;
       h.style.animationDuration = dur + "s";
-
-      // dimensione random
-      const size = 16 + Math.random() * 14;
-      h.style.fontSize = size + "px";
 
       document.body.appendChild(h);
 
-      // kick GPU (Safari)
+      // Trigger GPU (Safari fix)
       requestAnimationFrame(() => {
         h.style.transform = "translate3d(0,1px,0)";
       });
 
-      setTimeout(() => h.remove(), dur * 1000 + 200);
+      // Cleanup
+      setTimeout(() => {
+        h.remove();
+      }, dur * 1000 + 200);
     }
 
-    // start: più intenso nei primi secondi
-    const rainFast = setInterval(dropHeart, 90);
-    setTimeout(() => clearInterval(rainFast), 1800);
+    // Avvia pioggia
+    const rain = setInterval(dropHeart, 120);
 
-    // poi più soft
-    const rainSoft = setInterval(dropHeart, 150);
-    setTimeout(() => clearInterval(rainSoft), 7000);
+    // Stop dopo 7s
+    setTimeout(() => {
+      clearInterval(rain);
+    }, 7000);
   </script>
 
 </body>
