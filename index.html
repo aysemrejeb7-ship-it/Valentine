@@ -7,13 +7,14 @@
 
   <style>
     :root{
-      --pink:#ff2d55;
-      --pink2:#ff5aa5;
-      --glass: rgba(255,255,255,.22);
-      --card: rgba(255,255,255,.88);
-      --shadow: 0 24px 70px rgba(0,0,0,.18);
-      --shadow2: 0 14px 28px rgba(255,45,85,.18);
-      --txt:#1f1f1f;
+      --rose:#ff2d55;
+      --rose2:#ff6aa8;
+      --ink:#1f1a1e;
+      --muted: rgba(31,26,30,.70);
+      --card: rgba(255,255,255,.82);
+      --line: rgba(255,255,255,.65);
+      --shadow: 0 26px 70px rgba(0,0,0,.16);
+      --shadow2: 0 18px 40px rgba(255,45,85,.18);
     }
 
     *{ box-sizing:border-box; }
@@ -25,201 +26,199 @@
       align-items:center;
       justify-content:center;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--txt);
+      color: var(--ink);
       overflow:hidden;
 
-      /* background più ricco */
+      /* SFONDO CHIARO (no nero) */
       background:
-        radial-gradient(900px 520px at 18% 15%, rgba(255,255,255,.55), rgba(255,255,255,0) 55%),
-        radial-gradient(820px 520px at 82% 85%, rgba(255,255,255,.45), rgba(255,255,255,0) 60%),
-        radial-gradient(circle at top, #ffd1e8, #f7b7d3);
+        radial-gradient(900px 520px at 16% 14%, rgba(255,255,255,.70), rgba(255,255,255,0) 55%),
+        radial-gradient(820px 520px at 82% 86%, rgba(255,255,255,.60), rgba(255,255,255,0) 60%),
+        radial-gradient(circle at top, #ffe2f0, #f6b6cf 55%, #f3a8c8);
     }
 
-    /* pattern cuori soft */
+    /* texture premium micro */
     body::before{
       content:"";
       position:fixed;
-      inset:-30px;
+      inset:-40px;
       background-image:
-        radial-gradient(circle at 20px 20px, rgba(255,255,255,.55) 0 1px, transparent 2px),
-        radial-gradient(circle at 90px 70px, rgba(255,255,255,.38) 0 1px, transparent 2px),
-        radial-gradient(circle at 150px 30px, rgba(255,255,255,.30) 0 1px, transparent 2px);
+        radial-gradient(circle at 22px 22px, rgba(255,255,255,.55) 0 1px, transparent 2px),
+        radial-gradient(circle at 92px 74px, rgba(255,255,255,.30) 0 1px, transparent 2px),
+        radial-gradient(circle at 150px 34px, rgba(255,255,255,.22) 0 1px, transparent 2px);
       background-size: 180px 120px;
-      opacity:.35;
-      filter: blur(.2px);
+      opacity:.30;
       pointer-events:none;
+      filter: blur(.15px);
     }
 
-    /* glow */
+    /* glow soft */
     body::after{
       content:"";
       position:fixed;
-      inset:-40px;
+      inset:-60px;
       background:
-        radial-gradient(420px 260px at 50% 20%, rgba(255,45,85,.22), rgba(255,45,85,0) 70%),
-        radial-gradient(520px 340px at 50% 100%, rgba(255,90,165,.18), rgba(255,90,165,0) 70%);
+        radial-gradient(520px 300px at 50% 10%, rgba(255,45,85,.18), rgba(255,45,85,0) 70%),
+        radial-gradient(700px 420px at 50% 110%, rgba(255,106,168,.14), rgba(255,106,168,0) 75%);
       pointer-events:none;
       mix-blend-mode: soft-light;
     }
 
     .wrap{
-      width:min(560px, 92vw);
+      width:min(600px, 92vw);
       position:relative;
       z-index:1;
-    }
-
-    /* glass header */
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 18px;
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,.35);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 10px 28px rgba(0,0,0,.10);
-      margin-bottom: 12px;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-weight:800;
-      font-size:12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.35);
-      border: 1px solid rgba(255,255,255,.35);
-    }
-    .chip b{ color: var(--pink); }
-    .mini{
-      font-size:12px;
-      opacity:.75;
-      font-weight:650;
-      white-space:nowrap;
+      padding: 10px 0;
     }
 
     .card{
       background: var(--card);
-      border-radius: 26px;
-      padding: 22px 18px 18px;
+      border-radius: 30px;
+      padding: 26px 20px 18px;
       box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.55);
-      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.70);
       position:relative;
+      overflow:hidden;
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
-    /* corner hearts */
-    .corner{
+    /* bordo luce */
+    .card::before{
+      content:"";
       position:absolute;
-      font-size: 26px;
-      opacity:.28;
-      user-select:none;
+      inset:-2px;
+      border-radius: 32px;
+      background: linear-gradient(135deg,
+        rgba(255,255,255,.80),
+        rgba(255,255,255,0) 30%,
+        rgba(255,255,255,.55) 60%,
+        rgba(255,255,255,0) 100%);
+      opacity:.40;
       pointer-events:none;
-      filter: drop-shadow(0 10px 16px rgba(255,45,85,.12));
     }
-    .c1{ top:14px; left:16px; }
-    .c2{ top:18px; right:18px; }
-    .c3{ bottom:14px; left:18px; }
-    .c4{ bottom:16px; right:18px; }
+
+    /* ribbons soft */
+    .ribbon{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(220px 140px at 15% 15%, rgba(255,45,85,.08), transparent 60%),
+        radial-gradient(260px 160px at 85% 10%, rgba(255,106,168,.08), transparent 65%),
+        radial-gradient(260px 160px at 85% 90%, rgba(255,45,85,.06), transparent 65%);
+      pointer-events:none;
+      opacity:.95;
+    }
 
     .hero{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-      padding: 10px 8px 6px;
+      text-align:center;
+      padding: 8px 8px 6px;
+      position:relative;
+      z-index:1;
     }
 
-    .title{
+    h1{
       margin:0;
       font-size: 24px;
-      line-height:1.2;
-      text-align:center;
-      letter-spacing: .1px;
-    }
-    .name{
-      font-weight: 900;
-      color: var(--pink);
-      text-shadow: 0 10px 18px rgba(255,45,85,.15);
+      line-height:1.25;
+      letter-spacing:.1px;
     }
 
-    .sub{
-      margin:0;
-      text-align:center;
-      font-size: 13px;
-      opacity:.75;
-      font-weight:650;
-      max-width: 44ch;
+    .name{
+      font-weight: 950;
+      color: var(--rose);
+      text-shadow: 0 16px 26px rgba(255,45,85,.16);
+    }
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,.10), transparent);
+      margin: 14px 0 14px;
+      position:relative;
+      z-index:1;
     }
 
     .btns{
-      margin-top: 16px;
+      margin-top: 6px;
       display:flex;
       gap: 14px;
       justify-content:center;
       align-items:center;
       position:relative;
-      height: 64px;
-      padding-bottom: 2px;
+      height: 66px;
+      z-index: 1;
     }
 
     button{
       border:0;
       padding: 14px 22px;
-      border-radius: 16px;
-      font-weight: 900;
+      border-radius: 18px;
+      font-weight: 950;
       cursor:pointer;
       font-size: 14px;
       user-select:none;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       transition: transform .14s ease, filter .14s ease, box-shadow .14s ease;
-      letter-spacing: .2px;
+      letter-spacing:.2px;
     }
 
     #yes{
-      background: linear-gradient(135deg, var(--pink), var(--pink2));
-      color:white;
+      color:#fff;
+      background: linear-gradient(135deg, var(--rose), var(--rose2));
       box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
     }
-    #yes:hover{
-      filter: brightness(1.05);
-      transform: translateY(-1px);
-      box-shadow: 0 18px 32px rgba(255,45,85,.24);
+
+    /* shine */
+    #yes::after{
+      content:"";
+      position:absolute;
+      top:-20%;
+      left:-45%;
+      width: 40%;
+      height: 140%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: rotate(18deg);
+      opacity:.45;
+      animation: shine 2.8s ease-in-out infinite;
+      pointer-events:none;
     }
-    #yes:active{ transform: scale(.98); }
+    @keyframes shine{
+      0%{ left:-50%; opacity:0; }
+      20%{ opacity:.45; }
+      55%{ left:115%; opacity:.18; }
+      100%{ left:115%; opacity:0; }
+    }
+
+    #yes:hover{ filter: brightness(1.05); transform: translateY(-1px); box-shadow: 0 22px 48px rgba(255,45,85,.22); }
+    #yes:active{ transform: scale(.985); }
 
     #no{
-      background: rgba(255,255,255,.65);
-      color:#444;
+      background: rgba(255,255,255,.72);
+      color: rgba(31,26,30,.75);
       border: 1px solid rgba(0,0,0,.06);
       position:absolute;
-      right: 0;
+      right:0;
       touch-action: none;
-      box-shadow: 0 10px 18px rgba(0,0,0,.08);
+      box-shadow: 0 12px 20px rgba(0,0,0,.10);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
-    #no:active{ transform: scale(.98); }
+    #no:active{ transform: scale(.985); }
 
     .hint{
-      margin-top: 12px;
-      text-align:center;
+      margin-top: 14px;
       font-size: 12px;
-      opacity:.75;
-      font-weight:650;
+      color: var(--muted);
+      font-weight: 750;
+      text-align:center;
+      position:relative;
+      z-index:1;
     }
 
-    /* divider */
-    .divider{
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(0,0,0,.10), transparent);
-      margin: 14px 0 10px;
-    }
-
-    /* Overlay GIF premium */
+    /* Overlay */
     .overlay{
       position: fixed;
       inset: 0;
@@ -228,54 +227,23 @@
       justify-content:center;
       padding: 18px;
       z-index: 9999;
-      background: rgba(15, 10, 20, .30);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(0,0,0,.30);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .overlay.show{ display:flex; }
 
     .modal{
-      width:min(440px, 92vw);
+      width:min(460px, 94vw);
       background: rgba(255,255,255,.92);
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,.55);
-      box-shadow: 0 28px 90px rgba(0,0,0,.25);
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: 0 30px 100px rgba(0,0,0,.28);
       overflow:hidden;
-      transform: translateY(6px) scale(.98);
+      transform: translateY(10px) scale(.985);
       animation: modalIn .18s ease-out forwards;
     }
-    @keyframes modalIn{
-      to{ transform: translateY(0) scale(1); }
-    }
-
-    .modalTop{
-      padding: 12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      background: linear-gradient(135deg, rgba(255,45,85,.14), rgba(255,90,165,.10));
-    }
-    .modalTop .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-weight:900;
-      font-size:12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(255,255,255,.55);
-    }
-    .x{
-      border:0;
-      background: rgba(255,255,255,.65);
-      width:34px; height:34px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight:900;
-      box-shadow: 0 10px 18px rgba(0,0,0,.10);
-    }
+    @keyframes modalIn{ to{ transform: translateY(0) scale(1); } }
 
     .modalBody{
       padding: 14px;
@@ -284,23 +252,36 @@
       gap: 10px;
       align-items:center;
     }
+
     .modalBody img{
       width:100%;
-      max-height: 280px;
+      max-height: 300px;
       object-fit: contain;
       border-radius: 18px;
       background: rgba(0,0,0,.03);
       border: 1px solid rgba(0,0,0,.05);
     }
-    .modalText{
-      font-weight:900;
-      color: var(--pink);
+
+    .overlay-text{
+      font-weight: 950;
+      color: var(--rose);
+      font-size: 14px;
       text-align:center;
-      padding-bottom: 14px;
+      padding-bottom: 6px;
     }
 
-    /* micro shake */
-    .shake{ animation: shake .16s ease-in-out; }
+    .close{
+      width: 100%;
+      border:0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 900;
+      background: rgba(0,0,0,.06);
+      color: rgba(31,26,30,.80);
+      cursor:pointer;
+    }
+
+    .shake{ animation: shake .18s ease-in-out; }
     @keyframes shake{
       0%{ transform: translateX(0); }
       25%{ transform: translateX(-4px); }
@@ -312,20 +293,16 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="chip">💌 <b>Petit</b> code cadeau</div>
-      <div class="mini">Saint-Valentin 💖</div>
-    </div>
 
+  <div class="wrap">
     <div class="card" id="card">
-      <div class="corner c1">💗</div><div class="corner c2">💘</div><div class="corner c3">💞</div><div class="corner c4">💖</div>
+      <div class="ribbon"></div>
 
       <div class="hero">
-        <h1 class="title">
-          <span class="name" id="nome">Ons</span>, veux-tu être mon Valentin ? 💘
+        <h1>
+          <span class="name" id="nome">Ons</span>,
+          veux-tu être mon Valentin ? 💘
         </h1>
-        <p class="sub">Ay onusti jarb mara o5ra 🥰</p>
       </div>
 
       <div class="divider"></div>
@@ -335,30 +312,24 @@
         <button id="no" type="button">NON 🙈</button>
       </div>
 
-      <div class="hint">PS : ay mara o5ra ye habibti trah “NON” 😉💗</div>
+      <div class="hint">PS : Ay jarb mara o5ra onusti “NON” 😉💗</div>
     </div>
   </div>
 
-  <!-- Overlay -->
   <div class="overlay" id="overlay" aria-hidden="true">
-    <div class="modal">
-      <div class="modalTop">
-        <div class="tag" id="overlayTag">😺</div>
-        <button class="x" id="closeBtn" type="button">✕</button>
-      </div>
+    <div class="modal" role="dialog" aria-modal="true">
       <div class="modalBody">
         <img id="overlayImg" src="" alt="cat gif">
-        <div class="modalText" id="overlayText"></div>
+        <div class="overlay-text" id="overlayText"></div>
+        <button class="close" id="closeBtn" type="button">Fermer</button>
       </div>
     </div>
   </div>
 
   <script>
-    // GIF nella root del repo
     const GIF_YES = "cat-yes.gif";
     const GIF_NO  = "cat-no.gif";
 
-    // Nome via URL
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
     if (name) document.getElementById("nome").textContent = name;
@@ -367,23 +338,19 @@
     const noBtn  = document.getElementById("no");
     const card   = document.getElementById("card");
 
-    // Overlay UI
     const overlay = document.getElementById("overlay");
     const overlayImg = document.getElementById("overlayImg");
     const overlayText = document.getElementById("overlayText");
-    const overlayTag = document.getElementById("overlayTag");
     const closeBtn = document.getElementById("closeBtn");
 
     function showOverlay(kind){
       const who = name || document.getElementById("nome").textContent || "";
-
       overlayImg.src = (kind === "yes") ? GIF_YES : GIF_NO;
-      overlayTag.textContent = (kind === "yes") ? "😻 OUI" : "🥺 NON";
 
       overlayText.textContent =
         (kind === "yes")
-          ? `Ye rabbi onustii ${who} 💖`
-          : `Yezzi 3ad ye rohii 😿`;
+          ? `Ye rabiiii ${who} 💖`
+          : `Yezzi 3add ye rohii 😿`;
 
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
@@ -392,13 +359,12 @@
     function hideOverlay(){
       overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
-      overlayImg.src = ""; // stop GIF iOS-friendly
+      overlayImg.src = "";
     }
 
     closeBtn.addEventListener("click", hideOverlay);
     overlay.addEventListener("click", (e) => { if (e.target === overlay) hideOverlay(); });
 
-    // Logica bottoni: NO piccolo, YES grande
     let noScale  = 1;
     let yesScale = 1;
 
@@ -410,16 +376,13 @@
     function punishNo(e){
       e.preventDefault();
 
-      // shake
       card.classList.remove("shake");
       void card.offsetWidth;
       card.classList.add("shake");
 
-      // overlay NO
       showOverlay("no");
       setTimeout(hideOverlay, 950);
 
-      // shrink/grow
       noScale  *= 0.75;
       yesScale *= 1.16;
 
@@ -444,5 +407,6 @@
 
     updateSizes();
   </script>
+
 </body>
 </html>
