@@ -3,476 +3,147 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Saint-Valentin ✨</title>
+  <title>Oui 💖</title>
 
   <style>
-    :root{
-      --bg0:#09060b;
-      --bg1:#120a12;
-      --gold:#d7b57a;
-      --gold2:#f2dfb0;
-      --cream:#fff7ea;
-      --ink:#0f0c10;
-      --card: rgba(255,247,234,.92);
-      --glass: rgba(255,255,255,.08);
-      --line: rgba(215,181,122,.35);
-      --shadow: 0 30px 90px rgba(0,0,0,.55);
-      --shadowSoft: 0 18px 40px rgba(0,0,0,.35);
-    }
-
-    *{ box-sizing:border-box; }
-
     body{
       margin:0;
-      min-height:100vh;
+      height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
+      background: radial-gradient(circle at top, #ffd1e8, #f7b7d3);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--cream);
       overflow:hidden;
-      background:
-        radial-gradient(900px 520px at 20% 10%, rgba(215,181,122,.18), transparent 60%),
-        radial-gradient(820px 520px at 80% 90%, rgba(242,223,176,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-    }
-
-    /* texture luxury */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:-50px;
-      background:
-        radial-gradient(circle at 18px 18px, rgba(215,181,122,.18) 0 1px, transparent 2px),
-        radial-gradient(circle at 90px 60px, rgba(242,223,176,.12) 0 1px, transparent 2px);
-      background-size: 180px 120px;
-      opacity:.55;
-      pointer-events:none;
-      filter: blur(.2px);
-    }
-
-    /* soft vignette */
-    body::after{
-      content:"";
-      position:fixed;
-      inset:-40px;
-      background: radial-gradient(closest-side, transparent 40%, rgba(0,0,0,.55) 100%);
-      pointer-events:none;
-      opacity:.75;
-    }
-
-    .wrap{
-      width:min(640px, 92vw);
-      position:relative;
-      z-index:1;
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 10px 12px;
-      border-radius: 18px;
-      background: var(--glass);
-      border: 1px solid rgba(215,181,122,.22);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: var(--shadowSoft);
-      margin-bottom: 12px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(215,181,122,.35);
-      background: rgba(0,0,0,.18);
-      font-weight: 900;
-      font-size: 12px;
-      letter-spacing: .3px;
-      color: var(--gold2);
-    }
-
-    .mini{
-      font-weight: 800;
-      font-size: 12px;
-      opacity:.9;
-      letter-spacing:.3px;
-      color: rgba(242,223,176,.85);
-      white-space:nowrap;
     }
 
     .card{
-      background: var(--card);
-      color: var(--ink);
-      border-radius: 28px;
-      padding: 22px 18px 18px;
-      border: 1px solid rgba(215,181,122,.38);
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-
-    /* gold frame shine */
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius: 30px;
-      background: linear-gradient(135deg,
-        rgba(242,223,176,.55),
-        rgba(215,181,122,0) 32%,
-        rgba(242,223,176,.45) 62%,
-        rgba(215,181,122,0) 100%);
-      opacity:.55;
-      pointer-events:none;
-    }
-
-    /* top ornament line */
-    .ornament{
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(215,181,122,.55), transparent);
-      margin: 10px 0 12px;
-    }
-
-    .hero{
+      width:min(520px, 92vw);
+      background: rgba(255,255,255,.92);
+      border-radius: 18px;
+      padding: 30px 24px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.15);
       text-align:center;
-      padding: 10px 8px 2px;
-      position:relative;
-      z-index:1;
+      animation: pop .45s ease-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes pop{
+      0%{ transform: scale(.9); opacity:.2; }
+      70%{ transform: scale(1.05); opacity:1; }
+      100%{ transform: scale(1); }
     }
 
     h1{
-      margin:0;
-      font-size: 24px;
-      line-height:1.25;
-      letter-spacing: .2px;
+      margin:0 0 14px;
+      font-size: 30px;
     }
 
-    .name{
-      font-weight: 950;
-      background: linear-gradient(135deg, var(--gold2), var(--gold));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
-      text-shadow: 0 14px 26px rgba(0,0,0,.12);
+    #msg{
+      font-size: 20px;
+      font-weight: 800;
+      margin: 8px 0;
+      color:#ff2d55;
     }
 
-    .sub{
-      margin: 10px auto 0;
-      font-size: 13px;
-      font-weight: 700;
-      color: rgba(15,12,16,.72);
-      max-width: 48ch;
-    }
-
-    .btns{
-      margin-top: 18px;
-      display:flex;
-      gap: 14px;
-      justify-content:center;
-      align-items:center;
-      position:relative;
-      height: 66px;
-      z-index: 1;
-    }
-
-    button{
-      border:0;
-      padding: 14px 22px;
-      border-radius: 18px;
-      font-weight: 950;
-      cursor:pointer;
+    .small{
       font-size: 14px;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-      transition: transform .14s ease, filter .14s ease, box-shadow .14s ease;
-      letter-spacing: .2px;
+      opacity:.8;
+      margin-top: 12px;
     }
 
-    #yes{
-      color: #0b0810;
-      background: linear-gradient(135deg, var(--gold2), var(--gold));
-      box-shadow: 0 18px 32px rgba(215,181,122,.25);
-      position:relative;
-      overflow:hidden;
-    }
-
-    /* luxury shine sweep */
-    #yes::after{
-      content:"";
-      position:absolute;
-      top:-20%;
-      left:-45%;
-      width: 40%;
-      height: 140%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.70), transparent);
-      transform: rotate(18deg);
-      opacity:.55;
-      animation: shine 2.8s ease-in-out infinite;
-      pointer-events:none;
-    }
-    @keyframes shine{
-      0%{ left:-50%; opacity:0; }
-      20%{ opacity:.55; }
-      55%{ left:115%; opacity:.18; }
-      100%{ left:115%; opacity:0; }
-    }
-
-    #yes:hover{ filter: brightness(1.04); transform: translateY(-1px); }
-    #yes:active{ transform: scale(.985); }
-
-    #no{
-      background: rgba(15,12,16,.06);
-      color: rgba(15,12,16,.72);
-      border: 1px solid rgba(15,12,16,.06);
-      position:absolute;
-      right:0;
-      touch-action: none;
-      box-shadow: 0 14px 22px rgba(0,0,0,.10);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-    #no:active{ transform: scale(.985); }
-
-    .hint{
-      margin-top: 14px;
-      font-size: 12px;
-      color: rgba(15,12,16,.62);
-      font-weight: 750;
-      text-align:center;
-      z-index:1;
-      position:relative;
-    }
-
-    /* Overlay premium */
-    .overlay{
-      position: fixed;
-      inset: 0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
+    /* Cuori (iOS safe) */
+    .heart{
+      position: absolute;          /* <- non fixed (Safari bug) */
+      top: -40px;
+      font-size: 20px;
+      pointer-events: none;
+      opacity: .95;
       z-index: 9999;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .overlay.show{ display:flex; }
 
-    .modal{
-      width:min(480px, 94vw);
-      background: rgba(255,247,234,.94);
-      border-radius: 26px;
-      border: 1px solid rgba(215,181,122,.42);
-      box-shadow: 0 30px 110px rgba(0,0,0,.55);
-      overflow:hidden;
-      transform: translateY(10px) scale(.985);
-      animation: modalIn .18s ease-out forwards;
-    }
-    @keyframes modalIn{
-      to{ transform: translateY(0) scale(1); }
+      will-change: transform, opacity;
+
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
     }
 
-    .modalTop{
-      padding: 12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      background: linear-gradient(135deg, rgba(242,223,176,.65), rgba(215,181,122,.25));
-      border-bottom: 1px solid rgba(215,181,122,.25);
-    }
-
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-weight:950;
-      font-size:12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.10);
-      border: 1px solid rgba(0,0,0,.10);
-      color: rgba(15,12,16,.85);
-    }
-
-    .x{
-      border:0;
-      background: rgba(0,0,0,.10);
-      width:36px; height:36px;
-      border-radius: 14px;
-      cursor:pointer;
-      font-weight:950;
-      color: rgba(15,12,16,.85);
-      box-shadow: 0 12px 20px rgba(0,0,0,.18);
-    }
-
-    .modalBody{
-      padding: 14px 14px 16px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      align-items:center;
-    }
-
-    .modalBody img{
-      width:100%;
-      max-height: 300px;
-      object-fit: contain;
-      border-radius: 18px;
-      background: rgba(0,0,0,.03);
-      border: 1px solid rgba(0,0,0,.05);
-    }
-
-    .overlay-text{
-      font-weight:950;
-      color: rgba(15,12,16,.88);
-      font-size: 14px;
-      text-align:center;
-      padding-bottom: 8px;
-    }
-
-    /* shake */
-    .shake{ animation: shake .18s ease-in-out; }
-    @keyframes shake{
-      0%{ transform: translateX(0); }
-      25%{ transform: translateX(-4px); }
-      50%{ transform: translateX(4px); }
-      75%{ transform: translateX(-3px); }
-      100%{ transform: translateX(0); }
+    @keyframes fall{
+      from{
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+      to{
+        transform: translate3d(0,110vh,0);
+        opacity: .1;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="wrap">
-    <div class="topbar">
-      <div class="badge">✨ Petit code cadeau</div>
-      <div class="mini">Édition Luxe</div>
-    </div>
+  <div class="card">
+    <h1>💖 Ouiii !!! 💖</h1>
 
-    <div class="card" id="card">
-      <div class="hero">
-        <h1>
-          <span class="name" id="nome">Ons</span>,
-          veux-tu être mon Valentin ? 💘
-        </h1>
-        <div class="ornament"></div>
-        <p class="sub">Une petite surprise t’attend juste après…</p>
-      </div>
+    <div id="msg">Nmout 3alik 😘</div>
 
-      <div class="btns">
-        <button id="yes" type="button">OUI 💖</button>
-        <button id="no" type="button">NON 🙈</button>
-      </div>
-
-      <!-- TUA SCRITTA (identica) -->
-      <div class="hint">PS : Ay jarb mara o5ra onusti “NON” 😉💗</div>
-    </div>
+    <div class="small">Nhebk ❤️</div>
   </div>
 
-  <!-- Overlay GIF -->
-  <div class="overlay" id="overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modalTop">
-        <div class="tag" id="overlayTag">😺</div>
-        <button class="x" id="closeBtn" type="button" aria-label="Fermer">✕</button>
-      </div>
-      <div class="modalBody">
-        <img id="overlayImg" src="" alt="cat gif">
-        <div class="overlay-text" id="overlayText"></div>
-      </div>
-    </div>
-  </div>
 
   <script>
-    const GIF_YES = "cat-yes.gif";
-    const GIF_NO  = "cat-no.gif";
-
+    // Nome da URL
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
-    if (name) document.getElementById("nome").textContent = name;
 
-    const yesBtn = document.getElementById("yes");
-    const noBtn  = document.getElementById("no");
-    const card   = document.getElementById("card");
-
-    const overlay = document.getElementById("overlay");
-    const overlayImg = document.getElementById("overlayImg");
-    const overlayText = document.getElementById("overlayText");
-    const overlayTag = document.getElementById("overlayTag");
-    const closeBtn = document.getElementById("closeBtn");
-
-    function showOverlay(kind){
-      const who = name || document.getElementById("nome").textContent || "";
-      overlayImg.src = (kind === "yes") ? GIF_YES : GIF_NO;
-      overlayTag.textContent = (kind === "yes") ? "😻 OUI" : "🥺 NON";
-
-      overlayText.textContent =
-        (kind === "yes")
-          ? `Ye rabiiii ${who} 💖`
-          : `Yezzi 3add ye rohii 😿`;
-
-      overlay.classList.add("show");
-      overlay.setAttribute("aria-hidden", "false");
+    if (name) {
+      document.getElementById("msg").textContent =
+        `Nmout 3alik ${name} 😘`;
     }
 
-    function hideOverlay(){
-      overlay.classList.remove("show");
-      overlay.setAttribute("aria-hidden", "true");
-      overlayImg.src = "";
-    }
+    // Cuori
+    const hearts = ["💖","💘","💗","💞","💓","❤️","💕"];
 
-    closeBtn.addEventListener("click", hideOverlay);
-    overlay.addEventListener("click", (e) => { if (e.target === overlay) hideOverlay(); });
+    function dropHeart(){
 
-    let noScale  = 1;
-    let yesScale = 1;
+      const h = document.createElement("div");
+      h.className = "heart";
 
-    function updateSizes(){
-      noBtn.style.transform  = `scale(${noScale})`;
-      yesBtn.style.transform = `scale(${yesScale})`;
-    }
+      h.textContent =
+        hearts[Math.floor(Math.random()*hearts.length)];
 
-    function punishNo(e){
-      e.preventDefault();
+      // Posizione orizzontale (vw -> px per Safari)
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      const x = Math.random() * vw;
 
-      card.classList.remove("shake");
-      void card.offsetWidth;
-      card.classList.add("shake");
+      h.style.left = x + "px";
 
-      showOverlay("no");
-      setTimeout(hideOverlay, 950);
+      // Durata random
+      const dur = 2.8 + Math.random() * 2.5;
+      h.style.animationDuration = dur + "s";
 
-      noScale  *= 0.75;
-      yesScale *= 1.16;
+      document.body.appendChild(h);
 
-      if (noScale < 0.10) noScale = 0.10;
-      if (yesScale > 2.7) yesScale = 2.7;
+      // Trigger GPU (Safari fix)
+      requestAnimationFrame(() => {
+        h.style.transform = "translate3d(0,1px,0)";
+      });
 
-      updateSizes();
-    }
-
-    ["mouseenter","mousedown","touchstart","click"].forEach(ev => {
-      noBtn.addEventListener(ev, punishNo, { passive: false });
-    });
-
-    yesBtn.addEventListener("click", () => {
-      showOverlay("yes");
-      const q = name ? ("?name=" + encodeURIComponent(name)) : "";
+      // Cleanup
       setTimeout(() => {
-        hideOverlay();
-        window.location.href = "yess.html" + q;
-      }, 900);
-    });
+        h.remove();
+      }, dur * 1000 + 200);
+    }
 
-    updateSizes();
+    // Avvia pioggia
+    const rain = setInterval(dropHeart, 120);
+
+    // Stop dopo 7s
+    setTimeout(() => {
+      clearInterval(rain);
+    }, 7000);
   </script>
 
 </body>
