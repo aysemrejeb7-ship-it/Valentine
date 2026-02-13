@@ -3,273 +3,476 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Oui 💖</title>
+  <title>Saint-Valentin ✨</title>
 
   <style>
     :root{
-      --rose:#ff2d55;
-      --rose2:#ff6aa8;
-      --ink:#1f1a1e;
-      --card: rgba(255,255,255,.90);
-      --shadow: 0 22px 60px rgba(0,0,0,.15);
+      --bg0:#09060b;
+      --bg1:#120a12;
+      --gold:#d7b57a;
+      --gold2:#f2dfb0;
+      --cream:#fff7ea;
+      --ink:#0f0c10;
+      --card: rgba(255,247,234,.92);
+      --glass: rgba(255,255,255,.08);
+      --line: rgba(215,181,122,.35);
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
+      --shadowSoft: 0 18px 40px rgba(0,0,0,.35);
     }
 
     *{ box-sizing:border-box; }
 
     body{
       margin:0;
-      height:100vh;
+      min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--cream);
       overflow:hidden;
-      color: var(--ink);
-
-      /* background un po’ più “premium” ma sempre chiaro */
       background:
-        radial-gradient(900px 520px at 16% 14%, rgba(255,255,255,.70), rgba(255,255,255,0) 55%),
-        radial-gradient(820px 520px at 82% 86%, rgba(255,255,255,.60), rgba(255,255,255,0) 60%),
-        radial-gradient(circle at top, #ffe2f0, #f6b6cf 55%, #f3a8c8);
+        radial-gradient(900px 520px at 20% 10%, rgba(215,181,122,.18), transparent 60%),
+        radial-gradient(820px 520px at 80% 90%, rgba(242,223,176,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
     }
 
-    /* texture micro (leggerissima) */
+    /* texture luxury */
     body::before{
       content:"";
       position:fixed;
-      inset:-40px;
-      background-image:
-        radial-gradient(circle at 22px 22px, rgba(255,255,255,.55) 0 1px, transparent 2px),
-        radial-gradient(circle at 92px 74px, rgba(255,255,255,.30) 0 1px, transparent 2px),
-        radial-gradient(circle at 150px 34px, rgba(255,255,255,.22) 0 1px, transparent 2px);
+      inset:-50px;
+      background:
+        radial-gradient(circle at 18px 18px, rgba(215,181,122,.18) 0 1px, transparent 2px),
+        radial-gradient(circle at 90px 60px, rgba(242,223,176,.12) 0 1px, transparent 2px);
       background-size: 180px 120px;
-      opacity:.22;
+      opacity:.55;
       pointer-events:none;
-      filter: blur(.15px);
+      filter: blur(.2px);
     }
 
-    /* glow soft */
+    /* soft vignette */
     body::after{
       content:"";
       position:fixed;
-      inset:-60px;
-      background:
-        radial-gradient(520px 300px at 50% 10%, rgba(255,45,85,.16), rgba(255,45,85,0) 70%),
-        radial-gradient(700px 420px at 50% 110%, rgba(255,106,168,.12), rgba(255,106,168,0) 75%);
+      inset:-40px;
+      background: radial-gradient(closest-side, transparent 40%, rgba(0,0,0,.55) 100%);
       pointer-events:none;
-      mix-blend-mode: soft-light;
+      opacity:.75;
+    }
+
+    .wrap{
+      width:min(640px, 92vw);
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 10px 12px;
+      border-radius: 18px;
+      background: var(--glass);
+      border: 1px solid rgba(215,181,122,.22);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadowSoft);
+      margin-bottom: 12px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(215,181,122,.35);
+      background: rgba(0,0,0,.18);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .3px;
+      color: var(--gold2);
+    }
+
+    .mini{
+      font-weight: 800;
+      font-size: 12px;
+      opacity:.9;
+      letter-spacing:.3px;
+      color: rgba(242,223,176,.85);
+      white-space:nowrap;
     }
 
     .card{
-      width:min(520px, 92vw);
       background: var(--card);
-      border-radius: 26px;
-      padding: 30px 24px 22px;
+      color: var(--ink);
+      border-radius: 28px;
+      padding: 22px 18px 18px;
+      border: 1px solid rgba(215,181,122,.38);
       box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.70);
-      text-align:center;
-      position: relative;
-      z-index: 2;
+      position:relative;
       overflow:hidden;
-
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-
-      /* entrata più “cinematic” */
-      transform: translateY(18px) scale(.96);
-      opacity: 0;
-      animation: enter .70s cubic-bezier(.2,.9,.2,1) forwards;
     }
 
-    /* bordo luce */
+    /* gold frame shine */
     .card::before{
       content:"";
       position:absolute;
       inset:-2px;
-      border-radius: 28px;
+      border-radius: 30px;
       background: linear-gradient(135deg,
-        rgba(255,255,255,.85),
-        rgba(255,255,255,0) 30%,
-        rgba(255,255,255,.55) 60%,
-        rgba(255,255,255,0) 100%);
-      opacity:.40;
+        rgba(242,223,176,.55),
+        rgba(215,181,122,0) 32%,
+        rgba(242,223,176,.45) 62%,
+        rgba(215,181,122,0) 100%);
+      opacity:.55;
       pointer-events:none;
     }
 
-    /* ribbon soft */
-    .card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(260px 160px at 20% 20%, rgba(255,45,85,.08), transparent 60%),
-        radial-gradient(280px 180px at 85% 25%, rgba(255,106,168,.08), transparent 65%),
-        radial-gradient(280px 180px at 85% 90%, rgba(255,45,85,.06), transparent 65%);
-      pointer-events:none;
-      opacity:.95;
+    /* top ornament line */
+    .ornament{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(215,181,122,.55), transparent);
+      margin: 10px 0 12px;
     }
 
-    @keyframes enter{
-      0%{ transform: translateY(18px) scale(.96); opacity:0; }
-      70%{ transform: translateY(-2px) scale(1.02); opacity:1; }
-      100%{ transform: translateY(0) scale(1); opacity:1; }
-    }
-
-    /* reveal sequenziale (senza casino) */
-    .reveal{
+    .hero{
+      text-align:center;
+      padding: 10px 8px 2px;
       position:relative;
       z-index:1;
-      opacity:0;
-      transform: translateY(6px);
-      animation: reveal .55s ease-out forwards;
-    }
-    .d1{ animation-delay: .25s; }
-    .d2{ animation-delay: .55s; }
-    .d3{ animation-delay: .75s; }
-
-    @keyframes reveal{
-      to{ opacity:1; transform: translateY(0); }
     }
 
     h1{
-      margin:0 0 12px;
-      font-size: 30px;
-      letter-spacing:.2px;
+      margin:0;
+      font-size: 24px;
+      line-height:1.25;
+      letter-spacing: .2px;
     }
 
-    #msg{
-      font-size: 20px;
-      font-weight: 900;
-      margin: 8px 0;
-      color: var(--rose);
-      text-shadow: 0 16px 26px rgba(255,45,85,.16);
+    .name{
+      font-weight: 950;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+      text-shadow: 0 14px 26px rgba(0,0,0,.12);
     }
 
-    .small{
+    .sub{
+      margin: 10px auto 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(15,12,16,.72);
+      max-width: 48ch;
+    }
+
+    .btns{
+      margin-top: 18px;
+      display:flex;
+      gap: 14px;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+      height: 66px;
+      z-index: 1;
+    }
+
+    button{
+      border:0;
+      padding: 14px 22px;
+      border-radius: 18px;
+      font-weight: 950;
+      cursor:pointer;
       font-size: 14px;
-      font-weight: 800;
-      opacity:.82;
-      margin-top: 10px;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: transform .14s ease, filter .14s ease, box-shadow .14s ease;
+      letter-spacing: .2px;
     }
 
-    /* pulse leggerissimo (dopo l’entrata) */
-    .pulse{
-      animation: pulse 1.8s ease-in-out infinite;
-      animation-delay: 1.1s;
-    }
-    @keyframes pulse{
-      0%,100%{ transform: scale(1); }
-      50%{ transform: scale(1.02); }
+    #yes{
+      color: #0b0810;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      box-shadow: 0 18px 32px rgba(215,181,122,.25);
+      position:relative;
+      overflow:hidden;
     }
 
-    /* Sparkles discreti */
-    .spark{
+    /* luxury shine sweep */
+    #yes::after{
+      content:"";
       position:absolute;
-      width:10px; height:10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.85);
-      box-shadow: 0 0 18px rgba(255,45,85,.18);
-      opacity:.18;
-      animation: sparkle 1.6s ease-in-out infinite;
+      top:-20%;
+      left:-45%;
+      width: 40%;
+      height: 140%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.70), transparent);
+      transform: rotate(18deg);
+      opacity:.55;
+      animation: shine 2.8s ease-in-out infinite;
       pointer-events:none;
-      z-index:0;
     }
-    .s1{ top:16px; left:16px; animation-delay:.2s; }
-    .s2{ top:18px; right:18px; animation-delay:.6s; }
-    .s3{ bottom:16px; left:18px; animation-delay:.9s; }
-    .s4{ bottom:18px; right:20px; animation-delay:1.2s; }
-
-    @keyframes sparkle{
-      0%,100%{ transform: scale(.7); opacity:.14; }
-      50%{ transform: scale(1.25); opacity:.42; }
+    @keyframes shine{
+      0%{ left:-50%; opacity:0; }
+      20%{ opacity:.55; }
+      55%{ left:115%; opacity:.18; }
+      100%{ left:115%; opacity:0; }
     }
 
-    /* Cuori (iOS safe) */
-    .heart{
-      position: absolute;          /* <- non fixed (Safari bug) */
-      top: -40px;
-      font-size: 20px;
-      pointer-events: none;
-      opacity: .95;
+    #yes:hover{ filter: brightness(1.04); transform: translateY(-1px); }
+    #yes:active{ transform: scale(.985); }
+
+    #no{
+      background: rgba(15,12,16,.06);
+      color: rgba(15,12,16,.72);
+      border: 1px solid rgba(15,12,16,.06);
+      position:absolute;
+      right:0;
+      touch-action: none;
+      box-shadow: 0 14px 22px rgba(0,0,0,.10);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    #no:active{ transform: scale(.985); }
+
+    .hint{
+      margin-top: 14px;
+      font-size: 12px;
+      color: rgba(15,12,16,.62);
+      font-weight: 750;
+      text-align:center;
+      z-index:1;
+      position:relative;
+    }
+
+    /* Overlay premium */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
       z-index: 9999;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .overlay.show{ display:flex; }
 
-      will-change: transform, opacity;
-
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
+    .modal{
+      width:min(480px, 94vw);
+      background: rgba(255,247,234,.94);
+      border-radius: 26px;
+      border: 1px solid rgba(215,181,122,.42);
+      box-shadow: 0 30px 110px rgba(0,0,0,.55);
+      overflow:hidden;
+      transform: translateY(10px) scale(.985);
+      animation: modalIn .18s ease-out forwards;
+    }
+    @keyframes modalIn{
+      to{ transform: translateY(0) scale(1); }
     }
 
-    @keyframes fall{
-      from{ transform: translate3d(0,0,0); opacity: 1; }
-      to{ transform: translate3d(0,110vh,0); opacity: .10; }
+    .modalTop{
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: linear-gradient(135deg, rgba(242,223,176,.65), rgba(215,181,122,.25));
+      border-bottom: 1px solid rgba(215,181,122,.25);
     }
 
-    @media (prefers-reduced-motion: reduce){
-      .card, .reveal, .pulse, .spark, .heart{ animation: none !important; }
-      .card{ opacity:1; transform:none; }
-      .reveal{ opacity:1; transform:none; }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:950;
+      font-size:12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.10);
+      border: 1px solid rgba(0,0,0,.10);
+      color: rgba(15,12,16,.85);
+    }
+
+    .x{
+      border:0;
+      background: rgba(0,0,0,.10);
+      width:36px; height:36px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight:950;
+      color: rgba(15,12,16,.85);
+      box-shadow: 0 12px 20px rgba(0,0,0,.18);
+    }
+
+    .modalBody{
+      padding: 14px 14px 16px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      align-items:center;
+    }
+
+    .modalBody img{
+      width:100%;
+      max-height: 300px;
+      object-fit: contain;
+      border-radius: 18px;
+      background: rgba(0,0,0,.03);
+      border: 1px solid rgba(0,0,0,.05);
+    }
+
+    .overlay-text{
+      font-weight:950;
+      color: rgba(15,12,16,.88);
+      font-size: 14px;
+      text-align:center;
+      padding-bottom: 8px;
+    }
+
+    /* shake */
+    .shake{ animation: shake .18s ease-in-out; }
+    @keyframes shake{
+      0%{ transform: translateX(0); }
+      25%{ transform: translateX(-4px); }
+      50%{ transform: translateX(4px); }
+      75%{ transform: translateX(-3px); }
+      100%{ transform: translateX(0); }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card pulse">
-    <div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div><div class="spark s4"></div>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="badge">✨ Petit code cadeau</div>
+      <div class="mini">Édition Luxe</div>
+    </div>
 
-    <h1 class="reveal d1">💖 Ouiii !!! 💖</h1>
+    <div class="card" id="card">
+      <div class="hero">
+        <h1>
+          <span class="name" id="nome">Ons</span>,
+          veux-tu être mon Valentin ? 💘
+        </h1>
+        <div class="ornament"></div>
+        <p class="sub">Une petite surprise t’attend juste après…</p>
+      </div>
 
-    <div id="msg" class="reveal d2">Nmout 3alik 😘</div>
+      <div class="btns">
+        <button id="yes" type="button">OUI 💖</button>
+        <button id="no" type="button">NON 🙈</button>
+      </div>
 
-    <div class="small reveal d3">Nhebk ❤️</div>
+      <!-- TUA SCRITTA (identica) -->
+      <div class="hint">PS : Ay jarb mara o5ra onusti “NON” 😉💗</div>
+    </div>
   </div>
 
+  <!-- Overlay GIF -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modalTop">
+        <div class="tag" id="overlayTag">😺</div>
+        <button class="x" id="closeBtn" type="button" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modalBody">
+        <img id="overlayImg" src="" alt="cat gif">
+        <div class="overlay-text" id="overlayText"></div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // Nome da URL
+    const GIF_YES = "cat-yes.gif";
+    const GIF_NO  = "cat-no.gif";
+
     const params = new URLSearchParams(window.location.search);
     const name = params.get("name");
+    if (name) document.getElementById("nome").textContent = name;
 
-    if (name) {
-      document.getElementById("msg").textContent = `Nmout 3alik ${name} 😘`;
+    const yesBtn = document.getElementById("yes");
+    const noBtn  = document.getElementById("no");
+    const card   = document.getElementById("card");
+
+    const overlay = document.getElementById("overlay");
+    const overlayImg = document.getElementById("overlayImg");
+    const overlayText = document.getElementById("overlayText");
+    const overlayTag = document.getElementById("overlayTag");
+    const closeBtn = document.getElementById("closeBtn");
+
+    function showOverlay(kind){
+      const who = name || document.getElementById("nome").textContent || "";
+      overlayImg.src = (kind === "yes") ? GIF_YES : GIF_NO;
+      overlayTag.textContent = (kind === "yes") ? "😻 OUI" : "🥺 NON";
+
+      overlayText.textContent =
+        (kind === "yes")
+          ? `Ye rabiiii ${who} 💖`
+          : `Yezzi 3add ye rohii 😿`;
+
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden", "false");
     }
 
-    // Cuori + qualche sparkle
-    const hearts = ["💖","💘","💗","💞","💓","❤️","💕","✨"];
-
-    function dropHeart(){
-      const h = document.createElement("div");
-      h.className = "heart";
-      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
-
-      // Posizione orizzontale (px per Safari)
-      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      h.style.left = (Math.random() * vw) + "px";
-
-      // Durata random
-      const dur = 2.6 + Math.random() * 2.6;
-      h.style.animationDuration = dur + "s";
-
-      // Size random
-      h.style.fontSize = (16 + Math.random()*14) + "px";
-
-      document.body.appendChild(h);
-
-      // Trigger GPU (Safari fix)
-      requestAnimationFrame(() => {
-        h.style.transform = "translate3d(0,1px,0)";
-      });
-
-      setTimeout(() => h.remove(), dur * 1000 + 200);
+    function hideOverlay(){
+      overlay.classList.remove("show");
+      overlay.setAttribute("aria-hidden", "true");
+      overlayImg.src = "";
     }
 
-    // Pioggia: più intensa all’inizio, poi più soft
-    const fast = setInterval(dropHeart, 90);
-    setTimeout(() => clearInterval(fast), 1600);
+    closeBtn.addEventListener("click", hideOverlay);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) hideOverlay(); });
 
-    const soft = setInterval(dropHeart, 140);
-    setTimeout(() => clearInterval(soft), 7000);
+    let noScale  = 1;
+    let yesScale = 1;
+
+    function updateSizes(){
+      noBtn.style.transform  = `scale(${noScale})`;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    function punishNo(e){
+      e.preventDefault();
+
+      card.classList.remove("shake");
+      void card.offsetWidth;
+      card.classList.add("shake");
+
+      showOverlay("no");
+      setTimeout(hideOverlay, 950);
+
+      noScale  *= 0.75;
+      yesScale *= 1.16;
+
+      if (noScale < 0.10) noScale = 0.10;
+      if (yesScale > 2.7) yesScale = 2.7;
+
+      updateSizes();
+    }
+
+    ["mouseenter","mousedown","touchstart","click"].forEach(ev => {
+      noBtn.addEventListener(ev, punishNo, { passive: false });
+    });
+
+    yesBtn.addEventListener("click", () => {
+      showOverlay("yes");
+      const q = name ? ("?name=" + encodeURIComponent(name)) : "";
+      setTimeout(() => {
+        hideOverlay();
+        window.location.href = "yess.html" + q;
+      }, 900);
+    });
+
+    updateSizes();
   </script>
 
 </body>
