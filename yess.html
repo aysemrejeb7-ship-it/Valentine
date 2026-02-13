@@ -15,6 +15,7 @@
       background: radial-gradient(circle at top, #ffd1e8, #f7b7d3);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       overflow:hidden;
+      position: relative; /* aiuta su iOS */
     }
 
     .card{
@@ -55,13 +56,12 @@
 
     /* Cuori (iOS safe) */
     .heart{
-      position: absolute;          /* <- non fixed (Safari bug) */
+      position: absolute;
       top: -40px;
       font-size: 20px;
       pointer-events: none;
       opacity: .95;
       z-index: 9999;
-
       will-change: transform, opacity;
 
       animation-name: fall;
@@ -70,14 +70,8 @@
     }
 
     @keyframes fall{
-      from{
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-      to{
-        transform: translate3d(0,110vh,0);
-        opacity: .1;
-      }
+      from{ transform: translate3d(0,0,0); opacity: 1; }
+      to{ transform: translate3d(0,110vh,0); opacity: .1; }
     }
   </style>
 </head>
@@ -86,12 +80,9 @@
 
   <div class="card">
     <h1>💖 Ye 3azisti 😍 !!! 💖</h1>
-
     <div id="msg">Nmout 3alik 😘</div>
-
     <div class="small">Nhebk ❤️</div>
   </div>
-
 
   <script>
     // Nome da URL
@@ -99,51 +90,34 @@
     const name = params.get("name");
 
     if (name) {
-      document.getElementById("msg").textContent =
-        `Nmout 3alik ${name} 😘`;
+      document.getElementById("msg").textContent = `Nmout 3alik ${name} 😘`;
     }
 
-    // Cuori
+    // Cuori ✅ FIX: virgole corrette
     const hearts = ["💖","💘","💗","💞","💓","❤️","💕","😘","😍"];
 
     function dropHeart(){
-
       const h = document.createElement("div");
       h.className = "heart";
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
 
-      h.textContent =
-        hearts[Math.floor(Math.random()*hearts.length)];
-
-      // Posizione orizzontale (vw -> px per Safari)
       const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      const x = Math.random() * vw;
+      h.style.left = (Math.random() * vw) + "px";
 
-      h.style.left = x + "px";
-
-      // Durata random
       const dur = 2.8 + Math.random() * 2.5;
       h.style.animationDuration = dur + "s";
 
       document.body.appendChild(h);
 
-      // Trigger GPU (Safari fix)
       requestAnimationFrame(() => {
         h.style.transform = "translate3d(0,1px,0)";
       });
 
-      // Cleanup
-      setTimeout(() => {
-        h.remove();
-      }, dur * 1000 + 200);
+      setTimeout(() => h.remove(), dur * 1000 + 200);
     }
 
-    // Avvia pioggia
     const rain = setInterval(dropHeart, 120);
-
-    // Stop dopo 7s
-    setTimeout(() => {
-      clearInterval(rain);
-    }, 7000);
+    setTimeout(() => clearInterval(rain), 7000);
   </script>
 
 </body>
